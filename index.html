@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mazhar Ali — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1a; --bg2: #0f1726; --card: #121c2e; --card2: #16233a;
+    --ink: #e8eef7; --muted: #93a3b8; --line: #22324b;
+    --cyan: #22d3ee; --blue: #3b82f6; --green: #34d399;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+  a { color: var(--cyan); }
+
+  /* Nav */
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(10,15,26,0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .logo { font-family: 'JetBrains Mono', monospace; color: var(--cyan); font-weight: 500; text-decoration: none; }
+  .links { display: flex; gap: 22px; overflow-x: auto; }
+  .links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; white-space: nowrap; transition: color .2s; }
+  .links a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; padding: 80px 0 72px; }
+  .hero::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(600px 300px at 85% 10%, rgba(34,211,238,0.18), transparent 70%),
+      radial-gradient(500px 300px at 10% 90%, rgba(59,130,246,0.18), transparent 70%);
+    pointer-events: none; }
+  .hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.25;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 44px 44px; mask-image: linear-gradient(to bottom, black, transparent 85%); -webkit-mask-image: linear-gradient(to bottom, black, transparent 85%); }
+  .hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: center; }
+  .avatar { width: 150px; height: 150px; border-radius: 50%; padding: 4px; background: linear-gradient(135deg, var(--cyan), var(--blue)); position: relative; }
+  .avatar img, .avatar span { width: 100%; height: 100%; border-radius: 50%; display: flex; align-items: center; justify-content: center; object-fit: cover; background: var(--bg2); font-family: 'Space Grotesk', sans-serif; font-size: 2.6rem; font-weight: 700; color: var(--cyan); }
+  .avatar img { position: absolute; inset: 4px; width: calc(100% - 8px); height: calc(100% - 8px); }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; color: var(--cyan); font-size: 0.85rem; letter-spacing: 0.06em; margin: 0 0 10px; }
+  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2.7rem; line-height: 1.1; margin: 0 0 10px; letter-spacing: -0.02em; }
+  .hero h1 .grad { background: linear-gradient(90deg, var(--cyan), var(--blue)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .role { color: var(--muted); margin: 0 0 18px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip { font-size: 0.82rem; font-weight: 500; padding: 5px 12px; border-radius: 999px; background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.3); color: var(--cyan); }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; padding: 11px 20px; border-radius: 10px; font-weight: 600; font-size: 0.95rem; transition: transform .15s, box-shadow .15s; }
+  .btn-primary { background: linear-gradient(90deg, var(--cyan), var(--blue)); color: #06101f; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,211,238,0.3); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--ink); background: var(--card); }
+  .btn-ghost:hover { border-color: var(--cyan); transform: translateY(-2px); }
+
+  /* Value prop */
+  .vp-card { margin-top: -20px; position: relative; z-index: 2; background: linear-gradient(135deg, var(--card2), var(--card)); border: 1px solid var(--line); border-radius: 16px; padding: 30px 32px; }
+  .vp-card h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.7rem; margin: 0 0 4px; }
+  .vp-card .sub { color: var(--cyan); font-weight: 500; margin: 0 0 14px; }
+  .vp-card p.text { margin: 0; color: #c9d4e3; font-size: 1.05rem; }
+
+  /* Sections */
+  section { padding: 64px 0 0; }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+  .sec-head .num { font-family: 'JetBrains Mono', monospace; color: var(--cyan); font-size: 0.9rem; }
+  .sec-head h2 { font-family: 'Space Grotesk', sans-serif; margin: 0; font-size: 1.6rem; }
+  .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; transition: border-color .2s, transform .2s; }
+  .card:hover { border-color: #33507a; }
+  .about { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+  .about p { margin: 0; color: #c9d4e3; }
+  .stats { display: grid; gap: 12px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .stat b { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; color: var(--cyan); }
+  .stat span { color: var(--muted); font-size: 0.88rem; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 26px; }
+  .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--cyan), var(--blue), transparent); }
+  .t-item { position: relative; margin-bottom: 14px; }
+  .t-item::before { content: ""; position: absolute; left: -25px; top: 26px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 3px solid var(--cyan); }
+  .t-item h3 { margin: 0 0 2px; font-size: 1.05rem; }
+  .t-item .meta { color: var(--muted); font-size: 0.9rem; margin: 0; }
+  .t-item p.desc { margin: 8px 0 0; color: #c9d4e3; font-size: 0.95rem; }
+  .badge { display: inline-block; font-size: 0.72rem; font-weight: 600; color: var(--green); background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); padding: 2px 9px; border-radius: 999px; margin-left: 8px; vertical-align: middle; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .skills .icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(34,211,238,0.1); color: var(--cyan); margin-bottom: 14px; }
+  .skills h3 { margin: 0 0 12px; font-size: 1.05rem; }
+  .skills .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skills .tags span { font-size: 0.85rem; padding: 5px 11px; border-radius: 8px; background: var(--card2); border: 1px solid var(--line); color: #c9d4e3; }
+
+  /* Artifact */
+  .artifact { padding: 0; overflow: hidden; }
+  .artifact .top { padding: 28px 28px 22px; background: linear-gradient(135deg, rgba(34,211,238,0.08), rgba(59,130,246,0.06)); border-bottom: 1px solid var(--line); }
+  .tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--cyan); margin-bottom: 8px; }
+  .artifact h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; margin: 0 0 8px; line-height: 1.25; }
+  .artifact .intro { color: #c9d4e3; margin: 0 0 18px; }
+  .shot { margin: 0 0 18px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+  .shot img { display: block; width: 100%; }
+  .fields { padding: 8px 28px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
+  .field { padding: 18px 0 0; }
+  .field.full { grid-column: 1 / -1; }
+  .field h4 { margin: 0 0 6px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+  .field p { margin: 0; color: #c9d4e3; }
+  .vp-box { grid-column: 1 / -1; margin-top: 20px; padding: 20px 22px; border-radius: 12px; background: var(--card2); border-left: 3px solid var(--cyan); }
+  .vp-box h4 { margin: 0 0 8px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+  .vp-box p { margin: 0 0 10px; color: #c9d4e3; }
+  .vp-box p:last-child { margin: 0; }
+  .vp-box b { color: var(--ink); }
+  .toolchips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .toolchips span { font-size: 0.85rem; padding: 4px 11px; border-radius: 8px; background: var(--card2); border: 1px solid var(--line); }
+
+  footer { margin-top: 72px; border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 0.9rem; }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 760px) {
+    .hero { padding: 48px 0 56px; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 22px; }
+    .avatar { width: 110px; height: 110px; }
+    .hero h1 { font-size: 2rem; }
+    .about { grid-template-columns: 1fr; }
+    .fields { grid-template-columns: 1fr; padding: 4px 18px 22px; }
+    .artifact .top { padding: 22px 18px 18px; }
+    .vp-card { padding: 22px 18px; }
+    .links { gap: 14px; }
+    .logo { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">&lt;mazhar.ali /&gt;</a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#artifacts">Artifacts</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="avatar">
+      <span>MA</span>
+      <img src="photo.jpg" alt="Photo of Mazhar Mohammed Khursheed Ali" onerror="this.remove()">
+    </div>
+    <div>
+      <p class="eyebrow">// CYBERSECURITY × ARTIFICIAL INTELLIGENCE</p>
+      <h1>Mazhar Mohammed <span class="grad">Khursheed Ali</span></h1>
+      <p class="role">Aspiring Cybersecurity &amp; AI Professional · MBA in Marketing · Master of Science - Computer Info Systems - AI Spec (In Progress)</p>
+      <div class="chips">
+        <span class="chip">SOC Analysis</span>
+        <span class="chip">SIEM</span>
+        <span class="chip">Generative AI</span>
+        <span class="chip">AI Chatbots</span>
+        <span class="chip">Java</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#artifacts">View My Work →</a>
+        <a class="btn btn-ghost" href="https://poe.com/MKSecAlertHelper" target="_blank" rel="noopener">Try My AI Chatbot</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="vp-card reveal">
+    <h2>Bringing AI and Security Together</h2>
+    <p class="sub">Helping security teams use AI to understand threats faster and respond with confidence</p>
+    <p class="text">As an aspiring SOC analyst and AI developer, I help security teams use AI to understand threats faster and respond with confidence. I combine hands-on SOC training and SIEM experience with generative AI skills to build practical tools that make complex security work easier. With an MBA in Marketing, I can also explain technical risks in clear, simple language that decision-makers understand.</p>
+  </div>
+
+  <section id="about" class="reveal">
+    <div class="sec-head"><span class="num">01</span><h2>About Me</h2><span class="rule"></span></div>
+    <div class="about">
+      <div class="card">
+        <p>I am a graduate student at Indiana Wesleyan University, pursuing a Master of Science - Computer Info Systems - AI Spec. My goal is to work in cybersecurity or as a developer in AI fields. Before moving into technology, I earned a BBA (2016) and an MBA in Marketing (2019) from Osmania University, which gave me a strong foundation in business strategy, communication, and understanding what organizations need. In 2025, I completed a Security Operations Center (SOC) course at Full Stack Academy, where I gained hands-on experience with SIEM tools. I enjoy building practical tools that make complex technical work easier to understand, and this portfolio shows my progress as I learn and grow in AI and security.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>MBA</b><span>Marketing, Osmania University</span></div>
+        <div class="stat"><b>SOC</b><span>Trained, Full Stack Academy</span></div>
+        <div class="stat"><b>AI</b><span>Master's specialization in progress</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="reveal">
+    <div class="sec-head"><span class="num">02</span><h2>Education &amp; Training</h2><span class="rule"></span></div>
+    <div class="timeline">
+      <div class="t-item card">
+        <h3>Master of Science - Computer Info Systems - AI Spec <span class="badge">In Progress</span></h3>
+        <p class="meta">Indiana Wesleyan University · Expected March 2028</p>
+      </div>
+      <div class="t-item card">
+        <h3>SOC (Cybersecurity) Course</h3>
+        <p class="meta">Full Stack Academy · 2025</p>
+        <p class="desc">Security operations, threat monitoring, and alert investigation using SIEM tools.</p>
+      </div>
+      <div class="t-item card">
+        <h3>MBA in Marketing</h3>
+        <p class="meta">Osmania University · 2019</p>
+      </div>
+      <div class="t-item card">
+        <h3>Bachelor of Business Administration (BBA)</h3>
+        <p class="meta">Osmania University · 2016</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <div class="sec-head"><span class="num">03</span><h2>Skills</h2><span class="rule"></span></div>
+    <div class="skills">
+      <div class="card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Cybersecurity</h3>
+        <div class="tags"><span>SIEM Tools</span><span>Alert Monitoring</span><span>Alert Triage</span><span>Investigation</span><span>Incident Response Basics</span></div>
+      </div>
+      <div class="card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></div>
+        <h3>AI &amp; Programming</h3>
+        <div class="tags"><span>Generative AI</span><span>Prompt Design</span><span>Custom AI Chatbots</span><span>Java</span><span>Object-Oriented Programming</span></div>
+      </div>
+      <div class="card">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Professional</h3>
+        <div class="tags"><span>Leadership</span><span>Management</span><span>Marketing</span><span>Communication</span><span>Design Thinking</span><span>Problem-Solving</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="artifacts" class="reveal">
+    <div class="sec-head"><span class="num">04</span><h2>Artifacts</h2><span class="rule"></span></div>
+
+    <article class="card artifact">
+      <div class="top">
+        <span class="tag">ARTIFACT 01 · AI LAB</span>
+        <h3>Security Alert Helper: An AI Chatbot for Junior SOC Analysts</h3>
+        <p class="intro">A working AI chatbot I built that helps new Security Operations Center (SOC) analysts understand security alerts and decide what to do first.</p>
+        <div class="shot" id="shot"><img src="chatbot-screenshot.png" alt="Screenshot of the Security Alert Helper chatbot answering a security alert" onerror="document.getElementById('shot').remove()"></div>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://poe.com/MKSecAlertHelper" target="_blank" rel="noopener">Try the Live Chatbot ↗</a>
+          <a class="btn btn-ghost" href="AI_Lab_Documentation.pdf" target="_blank" rel="noopener">Download Documentation (PDF)</a>
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="field full">
+          <h4>Description</h4>
+          <p>Users paste a security alert or describe suspicious activity. The chatbot explains what the alert means in simple language, rates how serious it is (Low, Medium, or High) with a reason, lists 3 to 5 first investigation steps, and reminds the user to follow their organization's incident response policy. For example, when I tested it with multiple failed admin logins from an unknown IP, it identified a likely brute force attack, rated it High, and suggested checking for successful logins, checking the IP's reputation, and looking for password spraying. The full project documentation, including all tests and results, is available to download above.</p>
+        </div>
+        <div class="field">
+          <h4>Objective</h4>
+          <p>I created this chatbot to solve a real problem I saw during my SOC training: new analysts receive many technical alerts and are often unsure how serious they are or what to do first. I wanted to see whether a simple AI assistant could help them respond faster and with more confidence.</p>
+        </div>
+        <div class="field">
+          <h4>Tools and Technologies Used</h4>
+          <div class="toolchips"><span>Poe Prompt Bot</span><span>Gemini 3 Flash</span><span>Design Thinking</span><span>Microsoft Word</span></div>
+        </div>
+        <div class="field full">
+          <h4>Process</h4>
+          <p>I used design thinking. I started with the struggles of new analysts, wrote a clear problem statement, and compared three assistant ideas before choosing this one. I built the bot on Poe and wrote specific instructions for how it should respond, then added a greeting message. I ran into real obstacles: my first attempt did not create a shareable bot, the default model cost more points than my free account allowed, and my daily points ran out during testing. I rebuilt the bot with a lower-cost model and planned testing around the daily reset. Finally, I tested it with realistic security alerts and an off-topic question to check that it followed its instructions.</p>
+        </div>
+        <div class="vp-box">
+          <h4>Value Proposition</h4>
+          <p>This chatbot gives junior SOC analysts a fast, plain-language guide to any security alert, helping them prioritize threats and take the right first steps without waiting for a senior analyst.</p>
+          <p><b>Unique Value:</b> Combines my cybersecurity training with hands-on generative AI skills. It is a live product that anyone can try, not just a description of an idea, and it shows how I adapted when free-tool limits got in the way.</p>
+          <p><b>Relevance:</b> Security teams receive more alerts than they can easily handle, and AI assistants are becoming common tools in SOC work. This project shows skills that matter for both cybersecurity and AI development roles, while keeping human judgment and official procedures at the center.</p>
+        </div>
+        <div class="field full">
+          <h4>References</h4>
+          <p>AIML-500 AI Lab Guided Activity and course materials; Poe platform; Full Stack Academy SOC course materials</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Mazhar Mohammed Khursheed Ali · Built for AIML-500, Indiana Wesleyan University</div>
+</footer>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.08 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
+</body>
+</html>
